@@ -52,7 +52,7 @@ export const AddUser = () => {
 
     const ErrorMessage = (field) => {
         return (
-            <div class="invalid-feedback">{`Please enter the ${field}.`}</div>
+            <div className="invalid-feedback">{`Please enter the ${field}.`}</div>
         )
     }
 
@@ -103,7 +103,7 @@ export const AddUser = () => {
                                     id="email"
                                     required
                                     onChange={(e) => handleChangeInputValues('Email', e.target.value)} />
-                                {ErrorMessage('email address')}
+                                {ErrorMessage(details.Email ? 'valid email address' : 'email address')}
                             </div>
                         </div>
                         <div className="col-lg-6">
@@ -118,7 +118,7 @@ export const AddUser = () => {
                                     minLength={10}
                                     required
                                     onChange={(e) => handleChangeInputValues('PhoneNumber', e.target.value.replace(/[^0-9]/g, ''))} />
-                                {ErrorMessage('phone number')}
+                                {ErrorMessage(details.PhoneNumber ? 'valid phone number' : 'phone number')}
                             </div>
                         </div>
                         <div className="col-lg-6">
@@ -150,11 +150,11 @@ export const AddUser = () => {
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <label >State*</label>
-                                <select class="form-select" name="state" id="state" 
-                                value={details.State} onChange={(e) => handleChangeInputValues('State', e.target.value)}>
-                                  
+                                <select className="form-select" name="state" id="state"
+                                    value={details.State} onChange={(e) => handleChangeInputValues('State', e.target.value)}>
+
                                     {
-                                        statelist.state.map((list) => <option value={list}>{list}</option>
+                                        statelist.state.map((list, index) => <option key={index} value={list}>{list}</option>
                                         )
                                     }
 
@@ -191,9 +191,11 @@ export const AddUser = () => {
                                     className="form-control"
                                     value={details.PostalCode}
                                     id="postalcode"
+                                    maxLength={6}
+                                    minLength={6}
                                     required
-                                    onChange={(e) => handleChangeInputValues('PostalCode', e.target.value)} />
-                                {ErrorMessage('postal code')}
+                                    onChange={(e) => handleChangeInputValues('PostalCode', e.target.value.replace(/[^0-9]/g, ''))} />
+                                {ErrorMessage(details.PostalCode ? 'valid postal code' : 'postal code')}
                             </div>
                         </div>
                         <div className="col-lg-6 d-flex justify-content-end">
